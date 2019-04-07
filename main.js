@@ -1,45 +1,24 @@
 function pagination(currentPage, nrOfPages) {
-    
- var pagesToShow = 3,
-  page = currentPage - pagesToShow > 0 ? (currentPage - pagesToShow) : 1,
-  first = 0,
-  pageList = [];
 
- if (nrOfPages > pagesToShow) {
+	var pagesToShow = 3,
+		page = currentPage - pagesToShow > 0 ?  (currentPage - pagesToShow) : 1,
+		first = 0,
+	    pageList = [];
 
-  for (let i = currentPage - pagesToShow; i <= currentPage + pagesToShow && page <= nrOfPages; i++) {
+		 for (let i = 0; i < (pagesToShow * 2) && page < nrOfPages; i++) {
+			pageList.push(page);
+            page++;
 
-   if (currentPage - pagesToShow > 0 && first == 0) { // add first page
-    pageList.push(1);
-    if (page != 1 && currentPage - pagesToShow != 2) {
-     pageList.push('...');
-    } else {
-     pageList.push(page);
-    }
-    first = 1;
-   } else if (currentPage + pagesToShow < nrOfPages && i == currentPage + pagesToShow) { // add last page
+		}
 
-    if (currentPage - pagesToShow != nrOfPages && page != nrOfPages)
-     pageList.push('...');
-    pageList.push(nrOfPages);
+	  pageList.unshift(1); //add first page
+	  pageList.push(nrOfPages); //add last page
+			
 
-   } else { //rest of the pages
+	 
+    return pageList;
 
-    pageList.push(page);
-   }
-
-   page++;
-  }
-
- } else {
-
-  for (var i = 1; i < nrOfPages + 1; i++) {
-   pageList.push(i);
-
-  }
- }
- return pageList;
-} //pagination
+}//pagination
 
 console.log(pagination(6, 20));
 
