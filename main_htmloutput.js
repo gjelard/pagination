@@ -1,20 +1,20 @@
 function pagination(currentPage, nrOfPages) {
 
 	var pagesToShow = 3,
-		  page = currentPage - pagesToShow > 0 ?  (currentPage - pagesToShow) : 1,
-		  first = 0,
+	    page = currentPage - pagesToShow > 0 ?  (currentPage - pagesToShow) : 1,
+	    first = 0,
 	    pageList = [];
 
 
 		 for (let i = 0; i < (pagesToShow * 2) && page < nrOfPages; i++) {
 			 if(currentPage == page){ //do not add the link to current page number
 				  if(page != 1 && page != nrOfPages)
- 			 				pageList.push('<a href="javascript:void(0)" class="nav currentpage" data-page="'+page+'"  style="text-decoration: none;">'+page+'</a>');
+ 			 	     pageList.push('<a href="javascript:void(0)" class="nav currentpage" data-page="'+page+'"  style="text-decoration: none;">'+page+'</a>');
 				 }else{
-					    if(page != 1 && page != nrOfPages)
-					 		pageList.push('<a href="javascript:void(0)" class="nav" data-page="'+page+'">'+page+'</a>');
+				     if(page != 1 && page != nrOfPages)
+				        pageList.push('<a href="javascript:void(0)" class="nav" data-page="'+page+'">'+page+'</a>');
 				 }
-      page++;
+                    page++;
 
 		}
 
@@ -23,31 +23,32 @@ function pagination(currentPage, nrOfPages) {
 		 pageList.unshift('...');
 		 pageList.unshift('<a href="javascript:void(0)" class="nav" data-page="'+1+'">'+1+'</a>');
 	 }else{
-		    if(currentPage == 1){
+	        if(currentPage == 1){
 		    pageList.unshift('<a href="javascript:void(0)" class="nav currentpage" data-page="'+1+'"  style="text-decoration: none;">'+1+'</a>');
-			}else{
-					 pageList.unshift('<a href="javascript:void(0)" class="nav" data-page="'+1+'">'+1+'</a>');
-			}
+	       }else{
+	            pageList.unshift('<a href="javascript:void(0)" class="nav" data-page="'+1+'">'+1+'</a>');
+	        }
 
 	 }
 
 
 	 //add last page
+	 if(nrOfPages > 1)
 	 if(nrOfPages - pagesToShow  >  currentPage){
-		 pageList.push('...');
-		 pageList.push('<a href="javascript:void(0)" class="nav" data-page="'+nrOfPages+'">'+nrOfPages+'</a>');
+	     pageList.push('...');
+	     pageList.push('<a href="javascript:void(0)" class="nav" data-page="'+nrOfPages+'">'+nrOfPages+'</a>');
 	 }else{
-		 if(nrOfPages == currentPage){
-		    pageList.push('<a href="javascript:void(0)" class="nav currentpage" data-page="'+nrOfPages+'"  style="text-decoration: none;">'+nrOfPages+'</a>');
-			}else{
-				pageList.push('<a href="javascript:void(0)" class="nav" data-page="'+nrOfPages+'">'+nrOfPages+'</a>');
-			}
+	     if(nrOfPages == currentPage){
+		pageList.push('<a href="javascript:void(0)" class="nav currentpage" data-page="'+nrOfPages+'"  style="text-decoration: none;">'+nrOfPages+'</a>');
+	      }else{
+		pageList.push('<a href="javascript:void(0)" class="nav" data-page="'+nrOfPages+'">'+nrOfPages+'</a>');
+	      }
 
 	 }
 
 	var pagination = document.createElement('div');
-		pagination.setAttribute('id', 'pagination'); //add id
-		pagination.setAttribute('style','display: flex; margin-top:20px; justify-content: space-between;');
+	    pagination.setAttribute('id', 'pagination'); //add id
+	    pagination.setAttribute('style','display: flex; margin-top:20px; justify-content: space-between;');
 	var btnDisplay = document.createElement('div');
 	var next = currentPage == nrOfPages || nrOfPages == 0 ? '' : ' | <a href="javascript:void(0)" class="nav" data-page="next">Next</a>';
 	var prev = currentPage == 1  || nrOfPages < 1 ? '' : '<a href="javascript:void(0)" class="nav" data-page="prev">Prev</a> | ';
@@ -60,5 +61,5 @@ function pagination(currentPage, nrOfPages) {
     return pagination;
 
 }//pagination
-
+//pagination(12,20);
 //sample output::: Prev | 1...10 11 12 13 14 15...20 | Next
